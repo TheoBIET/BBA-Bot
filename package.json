@@ -4,7 +4,7 @@
   "description": "bot for bba corp",
   "main": "main.js",
   "scripts": {
-    "test": "node main"
+    "start": "node bot.js"
   },
   "repository": {
     "type": "git",
