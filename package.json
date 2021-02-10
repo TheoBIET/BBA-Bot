@@ -4,16 +4,20 @@
   "description": "bot for bba corp",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node main"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TheoBIET/BBA-Bot.git"
+    "url": "https://github.com/TheoBIET/BBA-Bot.git"
   },
   "author": "ƊɑѵƊɑѵ#5517",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/TheoBIET/BBA-Bot/issues"
   },
-  "homepage": "https://github.com/TheoBIET/BBA-Bot#readme"
+  "homepage": "https://github.com/TheoBIET/BBA-Bot#readme",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "moment": "^2.29.1"
+  }
 }
