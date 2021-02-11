@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 worker: node main.js
+=======
+worker: node main.js
+>>>>>>> da52211c1a51ed390cf53cb9299ace8a63ecfe4f
