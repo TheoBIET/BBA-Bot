@@ -4,7 +4,7 @@ const {
 
 module.exports.run = (client, message, args) => {
     let { logsChannelId } = require('./logsChannel.js')
-    
+
     // Récupération et stockage de l'utilisateur mentionné dans la variable 'user'
     const user = message.mentions.users.first();
     // Récupération des arguments présents après la mention
@@ -26,7 +26,7 @@ module.exports.run = (client, message, args) => {
         }else {
             client.channels.cache.get(logsChannelId).send(embed)
         }
-        //message.guild.member(user).ban(reason)
+        message.guild.member(user).ban(reason)
     }else {
         message.channel.send('L\'utilisateur mentionné n\'existe pas, veuillez réessayer');
     }

@@ -5,7 +5,7 @@ module.exports.run = (client, message, args) => {
     exports.welcomeChannelId = welcomeChannelId
 }
 module.exports.help = {
-    name : 'setWelcome',
+    name : 'setwelcome',
     aliases: ['setupwelcome', 'swelcome', 'msetup'],
     description : 'Enregistre l\ID du Channel souhaité pour les annonces de bienvenue',
     cooldown: 120,

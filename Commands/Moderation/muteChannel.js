@@ -5,7 +5,7 @@ module.exports.run = (client, message, args) => {
     exports.muteChannelId = muteChannelId
 }
 module.exports.help = {
-    name : 'setMute',
+    name : 'setmute',
     aliases: ['setupmute', 'smute', 'msetup'],
     description : 'Enregistre l\ID du Channel souhaité pour les personnes mute',
     cooldown: 120,

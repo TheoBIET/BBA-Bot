@@ -5,7 +5,7 @@ module.exports.run = (client, message, args) => {
     exports.logsChannelId = logsChannelId
 }
 module.exports.help = {
-    name : 'setLogs',
+    name : 'setlogs',
     aliases: ['setuplogs', 'slogs', 'lsetup'],
     description : 'Enregistre l\ID du Channel souhaité pour les Logs',
     cooldown: 120,

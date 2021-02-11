@@ -27,7 +27,7 @@ client.on('message', message => {
     const args = message.content.slice(PREFIX.length).split(/ +/);
     const commandName = args.shift().toLowerCase();
     //console.log(args.splice(1).join(' '));
-    const user = message.mentions.user.first();
+    //const user = message.mentions.users.first();
 
     // Si les messages ne commencent pas par le préfixe, ou qu'ils ont été envoyés par le BOT, on les ignore
     if (!message.content.startsWith(PREFIX) || message.author.bot) return;
@@ -35,6 +35,11 @@ client.on('message', message => {
     // Stockage du nom de la commande et de ses alias
     const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.help.aliases && cmd.help.aliases.includes(commandName));
     if (!command) return;
+    
+    //console.log(command);// On vérifie si la personne mentionnée est administrateur, pour empêcher l'éxecution de cette commande
+    if (command.help.isUserAdmin && message.mentions.users.first() && message.guild.member(message.mentions.users.first()).hasPermission("ADMINISTRATOR")) {
+        return message.delete() && message.reply(`Vous ne pouvez pas utiliser la commande **${command.help.name}** sur un modérateur!`)
+    }
 
     // On vérifie si la personne qui utilise la commande possède les permissions requises pour l'effectuer
     if (command.help.permissions && !message.member.hasPermission("ADMINISTRATOR")) return message.reply('Vous ne pouvez pas utiliser cette commande, utilisez **?help**')
@@ -48,14 +53,6 @@ client.on('message', message => {
                 .setDescription(`${message.author} \n ${command.help.usage} \n make by ƊɑѵƊɑѵ#5517`);
         return message.reply(embed);
     };
-
-    // On vérifie si la personne executant la commande a bien mentionné un utilisateur
-    if (command.help.isUserAdmin && !user) return message.reply('Il faut mentionner un utilisateur!')
-
-    //console.log(command);// On vérifie si la personne mentionnée est administrateur, pour empêcher l'éxecution de cette commande
-    if (command.help.isUserAdmin && message.mentions.users.first() && message.guild.member(message.mentions.users.first()).hasPermission("ADMINISTRATOR")) {
-        return message.delete() && message.reply(`Vous ne pouvez pas utiliser la commande **${command.help.name}** sur un modérateur!`)
-    }
 
     // Création du cooldown sur certaines commandes
     if (!client.cooldowns.has(command.help.name)) {
