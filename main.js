@@ -1,85 +1,91 @@
-const Discord = require("discord.js");
-const config = require("./config.json");
-const client = new Discord.Client();
-const moment = require('moment')
+const { Client, Collection, MessageEmbed } = require('discord.js');
+const { TOKEN, PREFIX } = require('./config');
+const { readdirSync } = require('fs');
 
-// Configuration au lancement du BOT
-client.on('ready', async () => {
-    console.log(`Connecté en tant que ${client.user.tag}!`);
-    client.user.setActivity('ƊɑѵƊɑѵ me coder', { type: 'WATCHING' }).catch(console.error);
-    //client.user.setAvatar('./assets/avatar.jpg').catch(console.error)
-    //client.user.setUsername('BBA Security').catch(console.error)
-});
+const client = new Client();
+['commands', 'cooldowns'].forEach(x => client[x] = new Collection());
 
-let idChannel = '';
-let active = false;
+// Récupération de tous les fichiers présents dans le répértoire ./commands
+const loadCommands = (dir = './Commands/') => {
+    let i = 0;
+    readdirSync(dir).forEach(dirs => {
+        const commands = readdirSync(`${dir}/${dirs}/`).filter(files => files.endsWith('.js'));
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-let DavDav = "632611245295534083"
-let Bombay = "514264303822700545"
-// On effectue une première commande afin de choisir le salon qui recevra les embed
+        for (const file of commands) {
+            const getFileName = require(`${dir}/${dirs}/${file}`);
+            client.commands.set(getFileName.help.name, getFileName);
+            //console.log(`Commande chargée: ${getFileName.help.name}`);
+            i++;
+        };
+    });
+    console.log(`${i} commandes ont été chargées sans problèmes`);
+};
+
+loadCommands();
+
 client.on('message', message => {
-    // On vérifie si l'auteur du message d'initialisation est autorisé à effectuer le changements
-    if (message.content === "ChooseThisChannel" && (message.author.id == Bombay || message.author.id == DavDav)){
-        // S'il est autorisé, on récupère l'id et le nom du channel en question et on le stocke dans une variable
-        channelName = message.channel.name
-        idChannel = message.channel.id
-        message.delete()
-        active = true;
-        // On envoie un message qui valide le changement
-        message.channel.send('Le Salon des arrivées à bien été mis à jour, lorsqu\'un nouveau membre rejoindra le serveur, un message sera envoyé dans **' + channelName + ": " + idChannel + '**')
-        return idChannel, active;
-    // Si l'auteur du message n'est pas autorisé à effectuer la commande 'ChooseThisChannel'
-      }else if (message.content === "ChooseThisChannel" && (message.author.id != Bombay || message.author.id != DavDav)) {
-        // On envoie un message pour avertir l'utilisateur qu'il n'est pas capable de faire cela et on le rédirige vers les bonnes personnes
-        message.channel.send('Vous n\'avez pas la permission de faire cela, contactez <@514264303822700545> ou <@632611245295534083> si vous souhaitez effectuez des changements')
-        return;
-    }
-})
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Envoi d'un embed à l'arrivée d'un nouveau membre
-client.on('guildMemberAdd', member => {
-    // On stocke l'id du salon choisi dans channel
-    let channel = client.channels.cache.find(channel => channel.id === idChannel)
-    // On récupère le lien vers la photo de profil du nouvel arrivant
-    let counter;
-    if (active) {
-        Counter(member.guild.memberCount)
-        let embed = new Discord.MessageEmbed()
-        .setColor('379b38')
-        .setThumbnail(member.user.displayAvatarURL())
-        .setTitle(`Bienvenue sur BBA Corporation!`)
-        .setDescription(`${member} tu es la ${counter} personne à nous rejoindre`)
-        .addFields(
-            { name: 'Invité par', value: 'In coding', inline: true },
-            { name: 'Compte créé le', value: `${moment(member.user.createdAt).locale("fr").format('Do MMMM YYYY')}`, inline: true },
-        )
-        .setTimestamp()
-        channel.send(embed)
-        // On compte le nombre de membre, selon le nombre on utilise son abréviation numérale
-        function Counter(memberCount){
-            memberCount = memberCount.toString()
-            let ADJ = "ème"
-            let Num = memberCount.charAt(memberCount.length - 1)
-            if(memberCount == "1"){
-                ADJ = "ère"
-            }else if (Num != "0"){
-                ADJ = "ème"
-            }else if (Num == "0"){
-                ADJ = "ième"
-            }
-            counter = memberCount + ADJ
-        }
-    // Si la configuration n'est pas terminée, on envoie un message dans le salon choisi par la fonction pour informer l'utilisateur que le BOT n'est pas correctement configuré
-    }else {
-        const guild = member.guild
-        let channel = guild.channels.cache.find(channel => channel.type === 'text' && channel.permissionsFor(guild.me).has('SEND_MESSAGES'));
-        channel.send(`${member} a rejoint le serveur, mais le BOT n'est pas configuré comme prévu, écrivez "ChooseThisChannel" dans le salon où vous souhaitez recevoir vos messages de bienvenue`);
+    const args = message.content.slice(PREFIX.length).split(/ +/);
+    const commandName = args.shift().toLowerCase();
+    //console.log(args.splice(1).join(' '));
+    const user = message.mentions.user.first();
+
+    // Si les messages ne commencent pas par le préfixe, ou qu'ils ont été envoyés par le BOT, on les ignore
+    if (!message.content.startsWith(PREFIX) || message.author.bot) return;
+
+    // Stockage du nom de la commande et de ses alias
+    const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.help.aliases && cmd.help.aliases.includes(commandName));
+    if (!command) return;
+
+    // On vérifie si la personne qui utilise la commande possède les permissions requises pour l'effectuer
+    if (command.help.permissions && !message.member.hasPermission("ADMINISTRATOR")) return message.reply('Vous ne pouvez pas utiliser cette commande, utilisez **?help**')
+
+    // Si la commande a besoin d'arguments, mais qu\'aucun n'en est donné, on envoie un message d'aide
+    if (command.help.args && !args.length) {
+        let embed = new MessageEmbed()
+                .setColor(`#ffffff`)
+                .setTitle(`Voici comment utiliser cette commande`)
+                .setThumbnail(client.user.displayAvatarURL())
+                .setDescription(`${message.author} \n ${command.help.usage} \n make by ƊɑѵƊɑѵ#5517`);
+        return message.reply(embed);
+    };
+
+    // On vérifie si la personne executant la commande a bien mentionné un utilisateur
+    if (command.help.isUserAdmin && !user) return message.reply('Il faut mentionner un utilisateur!')
+
+    //console.log(command);// On vérifie si la personne mentionnée est administrateur, pour empêcher l'éxecution de cette commande
+    if (command.help.isUserAdmin && message.mentions.users.first() && message.guild.member(message.mentions.users.first()).hasPermission("ADMINISTRATOR")) {
+        return message.delete() && message.reply(`Vous ne pouvez pas utiliser la commande **${command.help.name}** sur un modérateur!`)
     }
 
+    // Création du cooldown sur certaines commandes
+    if (!client.cooldowns.has(command.help.name)) {
+        client.cooldowns.set(command.help.name, new Collection());
+    }
+
+    // Récupération des données de temps
+    const timeNow = Date.now();
+    const tStamps = client.cooldowns.get(command.help.name);
+    const cdAmount = (command.help.cooldown || 0) * 1000;
+    //console.log(client.commands);
+    //console.log(client.cooldowns);
+
+    if (tStamps.has(message.author.id)) {
+        const cdExpirationTime = tStamps.get(message.author.id) + cdAmount;
+
+        // Si l'utilisateur tente d'utiliser la commande alors que le cooldown n'est pas terminé, alors on l'informe du temps restant
+        if (timeNow < cdExpirationTime) {
+            timeLeft = (cdExpirationTime - timeNow) / 1000
+            return message.reply(`Merci d'attendre ${timeLeft.toFixed(0)} seconde(s) avant de réutiliser la commande **${command.help.name}**`);
+        };
+    };
+
+    // Suppression de l'utilisateur dans la collection une fois le délai expiré
+    tStamps.set(message.author.id, timeNow)
+    setTimeout(() => tStamps.delete(message.author.id), cdAmount)
+
+    command.run(client, message, args)
+
 });
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-client.login(process.env.BOT_TOKEN)
+
+client.on('ready', () => { client.user.setUsername('BBA').catch(console.error); console.log(`${client.user.tag} connecté.`); });
+client.login(TOKEN);
