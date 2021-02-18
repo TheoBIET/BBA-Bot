@@ -8,7 +8,6 @@ module.exports.run = async (client, message, args) => {
     } = require('../Configuration/logsChannel.js')
     let user = await client.users.fetch(args[0])
 
-    // Si l'utlisateur mentionné existe alors on envoie un embed avec les informations concernées
     if (user) {
         message.guild.members.unban(user)
 

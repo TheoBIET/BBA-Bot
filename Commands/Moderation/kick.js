@@ -7,7 +7,6 @@ module.exports.run = (client, message, args) => {
     const user = message.mentions.users.first();
     let reason = args.splice(1).join(' ') || 'Aucune raison spécifiée';
 
-    // Si l'utlisateur mentionné existe alors on envoie un embed avec les informations concernées
     if (user) {
         let embed = new MessageEmbed()
             .setColor(`#FFA500`)
