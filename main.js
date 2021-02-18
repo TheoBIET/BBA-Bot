@@ -1,6 +1,15 @@
-const { Client, Collection, MessageEmbed } = require('discord.js');
-const { TOKEN, PREFIX } = require('./config');
-const { readdirSync } = require('fs');
+const {
+    Client,
+    Collection,
+    MessageEmbed
+} = require('discord.js');
+const {
+    TOKEN,
+    PREFIX
+} = require('./config');
+const {
+    readdirSync
+} = require('fs');
 
 const client = new Client();
 ['commands', 'cooldowns'].forEach(x => client[x] = new Collection());
@@ -25,9 +34,9 @@ loadCommands();
 
 client.on('message', message => {
     const args = message.content.slice(PREFIX.length).split(/ +/);
-    const commandName = args.shift().toLowerCase();
     //console.log(args.splice(1).join(' '));
-    //const user = message.mentions.users.first();
+    const commandName = args.shift().toLowerCase();
+    const user = message.mentions.users.first();
 
     // Si les messages ne commencent pas par le préfixe, ou qu'ils ont été envoyés par le BOT, on les ignore
     if (!message.content.startsWith(PREFIX) || message.author.bot) return;
@@ -35,24 +44,32 @@ client.on('message', message => {
     // Stockage du nom de la commande et de ses alias
     const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.help.aliases && cmd.help.aliases.includes(commandName));
     if (!command) return;
-    
-    //console.log(command);// On vérifie si la personne mentionnée est administrateur, pour empêcher l'éxecution de cette commande
-    if (command.help.isUserAdmin && message.mentions.users.first() && message.guild.member(message.mentions.users.first()).hasPermission("ADMINISTRATOR")) {
-        return message.delete() && message.reply(`Vous ne pouvez pas utiliser la commande **${command.help.name}** sur un modérateur!`)
-    }
 
     // On vérifie si la personne qui utilise la commande possède les permissions requises pour l'effectuer
     if (command.help.permissions && !message.member.hasPermission("ADMINISTRATOR")) return message.reply('Vous ne pouvez pas utiliser cette commande, utilisez **?help**')
 
     // Si la commande a besoin d'arguments, mais qu\'aucun n'en est donné, on envoie un message d'aide
+    let helpEmbed = new MessageEmbed()
+            .setColor(`#ffffff`)
+            .setTitle(`Voici comment utiliser cette commande`)
+            .setThumbnail(client.user.displayAvatarURL())
+            .setDescription(`${message.author} \n ${command.help.usage} \n make by ƊɑѵƊɑѵ#5517`);    
     if (command.help.args && !args.length) {
-        let embed = new MessageEmbed()
-                .setColor(`#ffffff`)
-                .setTitle(`Voici comment utiliser cette commande`)
-                .setThumbnail(client.user.displayAvatarURL())
-                .setDescription(`${message.author} \n ${command.help.usage} \n make by ƊɑѵƊɑѵ#5517`);
-        return message.reply(embed);
+        return message.reply(helpEmbed);
     };
+
+    // On vérifie si la personne qui utilise la commande a mentionné un utilisateur
+    if (command.help.isUserAdmin && !user) {
+        return message.reply('Vous devez **mentionner** un utilisateur')
+    } else if (command.name == 'mute' && command.help.args && args.length <= 2) {
+        return message.reply(helpEmbed);
+    }
+
+    //console.log(command);
+    // On vérifie si la personne mentionnée est administrateur, pour empêcher l'éxecution de cette commande
+    if (command.help.isUserAdmin && message.mentions.users.first() && message.guild.member(user).hasPermission("ADMINISTRATOR")) {
+        return message.delete() && message.reply(`Vous ne pouvez pas utiliser la commande **${command.help.name}** sur un modérateur!`)
+    }
 
     // Création du cooldown sur certaines commandes
     if (!client.cooldowns.has(command.help.name)) {
@@ -84,13 +101,13 @@ client.on('message', message => {
 
 });
 
-client.on('ready', () => { 
+client.on('ready', () => {
     // Mise à jour rapides des informations du BOT
     //client.user.setUsername('蛇喰 夢子').catch(console.error); 
-    console.log(`${client.user.tag} connecté.`); 
+    console.log(`${client.user.tag} connecté.`);
     //client.user.setAvatar('https://cdn.discordapp.com/attachments/644569508337549324/809504010649862155/1016983c9d7552e6.png');
     client.user.setActivity("ƊɑѵƊɑѵ me coder", {
         type: "WATCHING",
-      });
+    });
 });
 client.login(TOKEN);

@@ -3,10 +3,8 @@ const {
 } = require("discord.js");
 
 module.exports.run = (client, message, args) => {
-    let { logsChannelId } = require('./logsChannel.js')
-    // Récupération et stockage de l'utilisateur mentionné dans la variable 'user'
+    let { logsChannelId } = require('../Configuration/logsChannel.js')
     const user = message.mentions.users.first();
-    // Récupération des arguments présents après la mention
     let reason = args.splice(1).join(' ') || 'Aucune raison spécifiée';
 
     // Si l'utlisateur mentionné existe alors on envoie un embed avec les informations concernées
@@ -35,7 +33,7 @@ module.exports.help = {
     aliases: ['kick'],
     description: 'Kick un utilisateur mentionné',
     cooldown: 1,
-    usage: 'exemple: **?kick @BBA**',
+    usage: 'exemple: **?kick @user**',
     isUserAdmin: true,
     permissions: true,
     args: true,
