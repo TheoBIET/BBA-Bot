@@ -32,6 +32,7 @@ module.exports.run = (client, message, args) => {
 module.exports.help = {
     name: 'ban',
     aliases: ['ban'],
+    category: 'moderation',
     description: 'Banni l\'utilisateur mentionné',
     cooldown: 1,
     usage: 'exemple: **?ban @user**',

@@ -26,19 +26,20 @@ module.exports.run = (client, message, args) => {
             name: 'Dé 3',
             value: randomDice(),
             inline: true
-        },{
+        }, {
             name: 'Total',
             value: result,
             inline: true
-        },);
-        message.delete()
-        message.channel.send(embed)
+        }, );
+    message.delete()
+    message.channel.send(embed)
 };
 
 module.exports.help = {
-    name : 'dice',
+    name: 'dice',
     aliases: ['dé', 'de', '421'],
-    description : 'Lance 3 dé aléatoirement',
+    category: 'games',
+    description: 'Lance 3 dé aléatoirement',
     cooldown: 10,
     usage: '',
     permissions: false,

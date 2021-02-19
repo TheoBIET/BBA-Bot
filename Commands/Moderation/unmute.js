@@ -42,6 +42,7 @@ module.exports.run = async (client, message, args) => {
 module.exports.help = {
     name: 'unmute',
     aliases: ['unmute'],
+    category: 'moderation',
     description: 'Démute un utilisateur mentionné',
     cooldown: 1,
     usage: 'exemple: **?unmute @user <time> <reason>**',

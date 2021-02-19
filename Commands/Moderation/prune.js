@@ -50,6 +50,7 @@ module.exports.run = async (client, message, args) => {
 module.exports.help = {
     name: 'prune',
     aliases: ['prune', 'uclear'],
+    category: 'moderation',
     description: 'Supprime un nombre spécifié de messages sur un utilisateur précis dans le salon où la commande est réalisée',
     cooldown: 5,
     usage: 'exemple: **?prune <amount> <user_id>**',

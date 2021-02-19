@@ -4,9 +4,10 @@ module.exports.run = (client, message, args) => {
 }
 
 module.exports.help = {
-    name : 'say',
+    name: 'say',
     aliases: ['repeat', 'rep'],
-    description : 'Répète le message d\'un utilisateur',
+    category: 'miscellaneous',
+    description: 'Répète le message d\'un utilisateur',
     cooldown: 30,
     usage: 'exemple: **?say Hello World**',
     isUserAdmin: false,
