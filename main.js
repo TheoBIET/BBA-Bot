@@ -14,7 +14,7 @@ const {
 const client = new Client();
 ['commands', 'cooldowns'].forEach(x => client[x] = new Collection());
 
-// Récupération de tous les fichiers présents dans le répértoire ./commands
+// fork files from ./commands
 const loadCommands = (dir = './Commands/') => {
     let i = 0;
     readdirSync(dir).forEach(dirs => {
