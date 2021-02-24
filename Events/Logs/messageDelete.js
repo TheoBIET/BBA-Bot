@@ -12,17 +12,10 @@ module.exports = async (client, message) => {
     const latestMessageDeleted = fetchGuildAuditLogs.entries.first();
     const { executor } = latestMessageDeleted;
 
-    getChannelType = (type) => {
-        if (type === 'text') {
-            return 'Textuel'
-        } else {
-            return 'Vocal'
-        }
-    }
-
+    let content = message.content || 'Inconnu'
     let embed = new MessageEmbed()
         .setColor(`#9807AF`)
-        .setDescription(`**Auteur:** ${message.author}\n **Message:** ${message.content}`)
+        .setDescription(`**Auteur:** ${message.author}\n **Message:** ${content}`)
         .setAuthor(`Un message a été supprimé par ${executor.username}!`)
         .setThumbnail(executor.displayAvatarURL())
         .setTimestamp();

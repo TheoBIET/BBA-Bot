@@ -1,7 +1,13 @@
 module.exports.run = (client, message, args) => {
+    message.delete()
     let authImage;
     authImage = args[0]
-    message.channel.send('Pour voir les modifications, tapez `?authmessage`')
+    message.channel.send('**Pour voir les modifications, tapez `?auth`**')
+    .then(msg => {
+        msg.delete({
+            timeout: 10000
+        })
+    })
     exports.authImage = authImage
 }
 

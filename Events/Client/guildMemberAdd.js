@@ -6,7 +6,7 @@ let moment = require('moment')
 module.exports = (client, member) => {
     let {
         welcomeChannelId
-    } = require('../../Commands/Configuration/welcomeChannel')
+    } = require('../../Commands/Configuration/authChannel')
     let {
         logsChannelId
     } = require('../../Commands/Configuration/logsChannel')
@@ -43,11 +43,11 @@ module.exports = (client, member) => {
             inline: true
         }, )
         .setTimestamp()
-    if (welcomeChannelId === undefined) {
+    if (welcomeChannelId !== undefined) {
+        client.channels.cache.get(welcomeChannelId).send(embed)
+    } else {
         if (logsChannelId !== undefined) {
             client.channels.cache.get(logsChannelId).send(embed)
         }
-    } else {
-        client.channels.cache.get(welcomeChannelId).send(embed)
     }
 }

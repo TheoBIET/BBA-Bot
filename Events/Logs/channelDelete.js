@@ -28,7 +28,6 @@ module.exports = async (client, channel) => {
         .setThumbnail(executor.displayAvatarURL())
         .setFooter(`${executor.username}`)
         .setTimestamp();
-        console.log('%cchannelDelete.js line:25 channel.type', 'color: #007acc;', channel.type);
     if (logsChannelId !== undefined) {
         client.channels.cache.get(logsChannelId).send(embed)
     }
