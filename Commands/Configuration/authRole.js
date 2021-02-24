@@ -1,4 +1,5 @@
 module.exports.run = (client, message, args) => {
+    message.delete()
     let {
         logsChannelId
     } = require('./logsChannel.js')
@@ -12,12 +13,12 @@ module.exports.run = (client, message, args) => {
     exports.authRoleId = authRoleId
 }
 module.exports.help = {
-    name: 'setauth',
-    aliases: ['setauth', ],
+    name: 'authrole',
+    aliases: ['authrole', ],
     category: 'configuration',
     description: 'Enregistre l\ID du Rôle \'Vérifié\'',
     cooldown: 120,
-    usage: 'exemple: **?setauth 809197368267898931**',
+    usage: 'exemple: **?authrole 809197368267898931**',
     isUserAdmin: false,
     permissions: true,
     args: true,

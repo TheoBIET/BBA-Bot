@@ -8,16 +8,13 @@ const {
     readdirSync
 } = require('fs');
 const categoryList = readdirSync('./Commands');
-console.log('%chelp.js line:5 categoryList', 'color: #007acc;', categoryList);
+console.log(categoryList);
 
 module.exports.run = (client, message, args) => {
-    console.log('%chelp.js line:14 client.commands.', 'color: #007acc;', client.commands.filter(cat => cat.help.category));
-
-
-    if (!args) {
+    if (!args[0]) {
         const embed = new MessageEmbed()
             .setColor('#36393F')
-            .addField('Liste des commandes,', `Vous trouverez ci-dessous une liste de toutes les commandes disponibles classées en sous-catégories.\nPour plus d'informations sur une commande, tapez \`${PREFIX}help <command_name>\``)
+            .addField('Liste des commandes,', `Vous trouverez ci-dessous une liste de toutes les commandes disponibles classées en sous-catégories.\nPour plus d'informations sur une commande, ⤸\ntapez \`${PREFIX}help <command_name>\``)
             .setFooter('蛇喰 夢子 v0.7 by ƊɑѵƊɑѵ')
             .setThumbnail(client.user.displayAvatarURL())
             .setTimestamp()
@@ -31,9 +28,9 @@ module.exports.run = (client, message, args) => {
 
         return message.channel.send(embed)
     } else {
-        if(!command) return message.reply('Cette commande n\'existe probablement pas')
-
         const command = client.commands.get(args[0]) || client.commands.find(cmd => cmd.help.aliases && cmd.help.aliases.includes(args[0]));
+
+        if(!command) return message.reply('Cette commande n\'existe probablement pas')
 
         const embed = new MessageEmbed()
             .setTitle(`\`${command.help.name}\``)

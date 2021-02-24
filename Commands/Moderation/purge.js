@@ -1,9 +1,6 @@
 const {
     MessageEmbed
 } = require("discord.js");
-const {
-    logsSend
-} = require('../Configuration/logsChannel.js');
 
 module.exports.run = async (client, message, args) => {
     let {
