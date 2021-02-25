@@ -1,5 +1,18 @@
 const MESSAGES = {
     COMMANDS: {
+        ADMIN: {
+            EVAL: {
+                name: 'eval',
+                aliases: ['eval'],
+                category: 'admin',
+                description: 'Renvoie un code javascript testé',
+                cooldown: 3,
+                usage: 'exemple: **?eval <code_to_test>**',
+                isUserAdmin: false,
+                permissions: true,
+                args: true,
+            },
+        },
         CONFIGURATION: {
             AUTHCHANNEL: {
                 name: 'authchannel',

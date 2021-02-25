@@ -8,14 +8,16 @@ const {
 const {
     loadCommands,
     loadEvents
-} = require('./Util/loader')
+} = require('./Util/loader');
 
 const client = new Client();
 ['commands', 'cooldowns'].forEach(x => client[x] = new Collection());
 
-client.setMaxListeners(15)
+client.mongoose = require('./Util/mongoose');
+client.setMaxListeners(15);
 
 loadCommands(client);
 loadEvents(client);
+client.mongoose.init();
 
 client.login(TOKEN);
