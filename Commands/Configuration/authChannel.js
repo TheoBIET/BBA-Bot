@@ -1,3 +1,5 @@
+const { MESSAGES } = require('../../Util/constants')
+
 module.exports.run = (client, message, args) => {
     message.delete()
     let authChannelId;
@@ -11,14 +13,4 @@ module.exports.run = (client, message, args) => {
     exports.authChannelId = authChannelId
 }
 
-module.exports.help = {
-    name: 'authchannel',
-    aliases: ['authchannel'],
-    category: 'configuration',
-    description: 'Définis le salon qui recevra le message de vérification pour entrer dans le serveur',
-    cooldown: 120,
-    usage: 'exemple: **?authchannel <id_du_salon>**',
-    isUserAdmin: false,
-    permissions: true,
-    args: true,
-}
+module.exports.help = MESSAGES.COMMANDS.CONFIGURATION.AUTHCHANNEL

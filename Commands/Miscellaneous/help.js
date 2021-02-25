@@ -1,3 +1,4 @@
+const { MESSAGES } = require('../../Util/constants')
 const {
     MessageEmbed
 } = require('discord.js');
@@ -8,7 +9,6 @@ const {
     readdirSync
 } = require('fs');
 const categoryList = readdirSync('./Commands');
-console.log(categoryList);
 
 module.exports.run = (client, message, args) => {
     if (!args[0]) {
@@ -43,14 +43,4 @@ module.exports.run = (client, message, args) => {
     }
 }
 
-module.exports.help = {
-    name: 'help',
-    aliases: ['help'],
-    category: 'miscellaneous',
-    description: 'Vous envoie toute l\'aide nécessaire de toutes les commandes disponibles avec le bot 蛇喰 夢子, mais ça tu le sais déjà ^^',
-    cooldown: 10,
-    usage: 'exemple: **?say Hello World**',
-    isUserAdmin: false,
-    permissions: true,
-    args: false,
-}
+module.exports.help = MESSAGES.COMMANDS.MISCELLANEOUS.HELP

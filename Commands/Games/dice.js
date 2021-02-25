@@ -1,3 +1,5 @@
+const { MESSAGES } = require('../../Util/constants')
+
 module.exports.run = (client, message, args) => {
     const {
         MessageEmbed
@@ -35,13 +37,4 @@ module.exports.run = (client, message, args) => {
     message.channel.send(embed)
 };
 
-module.exports.help = {
-    name: 'dice',
-    aliases: ['dé', 'de', '421'],
-    category: 'games',
-    description: 'Lance 3 dé aléatoirement',
-    cooldown: 10,
-    usage: '',
-    permissions: false,
-    args: false,
-};
+module.exports.help = MESSAGES.COMMANDS.GAMES.DICE

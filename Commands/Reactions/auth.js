@@ -1,3 +1,4 @@
+const { MESSAGES } = require('../../Util/constants')
 const {
     MessageEmbed
 } = require('discord.js');
@@ -52,14 +53,4 @@ module.exports.run = async (client, message, args) => {
     }
 }
 
-module.exports.help = {
-    name: 'auth',
-    aliases: ['auth', 'auth'],
-    category: 'reactions',
-    description: 'Envoie un message de vérification avec une réaction sur le serveur',
-    cooldown: 10,
-    usage: 'exemple: **?authmessage **',
-    isUserAdmin: false,
-    permissions: true,
-    args: false,
-}
+module.exports.help = MESSAGES.COMMANDS.REACTIONS.AUTH

@@ -1,3 +1,4 @@
+const { MESSAGES } = require('../../Util/constants')
 const {
     MessageEmbed
 } = require("discord.js");
@@ -31,14 +32,4 @@ module.exports.run = async (client, message, args) => {
     }
 }
 
-module.exports.help = {
-    name: 'unban',
-    aliases: ['unban'],
-    category: 'moderation',
-    description: 'Débanni l\'utilisateur mentionné',
-    cooldown: 1,
-    usage: 'exemple: **?unban <user_id>**',
-    isUserAdmin: false,
-    permissions: true,
-    args: true,
-}
+module.exports.help = MESSAGES.COMMANDS.MODERATION.UNBAN

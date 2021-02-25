@@ -1,3 +1,5 @@
+const { MESSAGES } = require('../../Util/constants')
+
 module.exports.run = (client, message, args) => {
     message.delete()
     let logsChannelId;
@@ -11,14 +13,4 @@ module.exports.run = (client, message, args) => {
     exports.logsChannelId = logsChannelId
 }
 
-module.exports.help = {
-    name: 'setlogs',
-    aliases: ['setuplogs', 'slogs', 'lsetup'],
-    category: 'configuration',
-    description: 'Enregistre l\ID du Channel souhaité pour les Logs',
-    cooldown: 120,
-    usage: 'exemple: **?logs 809197368267898931**',
-    isUserAdmin: false,
-    permissions: true,
-    args: true,
-}
+module.exports.help = MESSAGES.COMMANDS.CONFIGURATION.LOGSCHANNEL

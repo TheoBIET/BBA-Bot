@@ -1,3 +1,4 @@
+const { MESSAGES } = require('../../Util/constants')
 const {
     MessageEmbed
 } = require("discord.js");
@@ -36,14 +37,4 @@ module.exports.run = async (client, message, args) => {
 
 }
 
-module.exports.help = {
-    name: 'purge',
-    aliases: ['purge', 'clear'],
-    category: 'moderation',
-    description: 'Supprime un nombre spécifié de messages dans le salon où la commande est réalisée',
-    cooldown: 5,
-    usage: 'exemple: **?purge <amount>**',
-    isUserAdmin: false,
-    permissions: true,
-    args: true,
-}
+module.exports.help = MESSAGES.COMMANDS.MODERATION.PURGE

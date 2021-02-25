@@ -7,6 +7,7 @@ const {
 } = require('../../config');
 
 module.exports = (client, message) => {
+    if (message.channel.type === 'dm') return client.emit('directMessage', message)
     // Si les messages ne commencent pas par le préfixe, ou qu'ils ont été envoyés par le BOT, on les ignore
     if (!message.content.startsWith(PREFIX) || message.author.bot) return;
 

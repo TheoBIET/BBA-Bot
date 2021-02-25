@@ -10,7 +10,6 @@ module.exports = async (client, channel) => {
     });
 
     const latestChannelDeleted = fetchGuildAuditLogs.entries.first();
-    //console.log('%cchannelCreate.js line:8 latestChannelCreated', 'color: #007acc;', latestChannelCreated);
     const { executor } = latestChannelDeleted;
 
     getChannelType = (type) => {

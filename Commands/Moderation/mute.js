@@ -1,3 +1,4 @@
+const { MESSAGES } = require('../../Util/constants')
 const ms = require('ms');
 const {
     MessageEmbed
@@ -83,14 +84,4 @@ module.exports.run = async (client, message, args) => {
 
 };
 
-module.exports.help = {
-    name: 'mute',
-    aliases: ['mute'],
-    category: 'moderation',
-    description: 'Mute un utilisateur mentionné',
-    cooldown: 1,
-    usage: 'exemple: **?mute @user <time> <reason>**',
-    isUserAdmin: true,
-    permissions: true,
-    args: true,
-}
+module.exports.help = MESSAGES.COMMANDS.MODERATION.MUTE
