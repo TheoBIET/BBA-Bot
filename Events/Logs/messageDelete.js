@@ -1,12 +1,11 @@
 const { MessageEmbed } = require('discord.js')
 
 module.exports = async (client, message) => {
-    let {
-        logsChannelId
-    } = require('../../Commands/Configuration/logsChannel')
+    const settings = await client.getGuild(message.guild);
+    let logsChannelId = settings.logsChannel
     const fetchGuildAuditLogs = await message.guild.fetchAuditLogs({
         limit : 1,
-        type : 'MESSAGE_CREATE'
+        type : 'MESSAGE_DELETE'
     });
 
     const latestMessageDeleted = fetchGuildAuditLogs.entries.first();
@@ -19,7 +18,7 @@ module.exports = async (client, message) => {
         .setAuthor(`Un message a été supprimé par ${executor.username}!`)
         .setThumbnail(executor.displayAvatarURL())
         .setTimestamp();
-    if (logsChannelId !== undefined) {
+    if (logsChannelId !== 'none') {
         client.channels.cache.get(logsChannelId).send(embed)
     }
 }

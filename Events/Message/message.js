@@ -2,16 +2,15 @@ const {
     Collection,
     MessageEmbed
 } = require('discord.js');
-const {
-    PREFIX
-} = require('../../config');
 
-module.exports = (client, message) => {
+module.exports = async (client, message) => {
     if (message.channel.type === 'dm') return client.emit('directMessage', message)
     // Si les messages ne commencent pas par le préfixe, ou qu'ils ont été envoyés par le BOT, on les ignore
-    if (!message.content.startsWith(PREFIX) || message.author.bot) return;
+    const settings = await client.getGuild(message.guild);
 
-    const args = message.content.slice(PREFIX.length).split(/ +/);
+    if (!message.content.startsWith(settings.prefix) || message.author.bot) return;
+
+    const args = message.content.slice(settings.prefix.length).split(/ +/);
     //console.log(args.splice(1).join(' '));
     const commandName = args.shift().toLowerCase();
     const user = message.mentions.users.first();
@@ -72,6 +71,6 @@ module.exports = (client, message) => {
     tStamps.set(message.author.id, timeNow)
     setTimeout(() => tStamps.delete(message.author.id), cdAmount)
 
-    command.run(client, message, args)
+    command.run(client, message, args, settings)
 
 }

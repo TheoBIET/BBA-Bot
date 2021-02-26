@@ -3,19 +3,15 @@ const {
     MessageEmbed
 } = require("discord.js");
 
-module.exports.run = async (client, message, args) => {
-    let {
-        logsChannelId
-    } = require('../Configuration/logsChannel.js');
-    let {
-        authRoleId
-    } = require('../Configuration/authRole.js');
+module.exports.run = async (client, message, args, settings) => {
+    let logsChannelId = settings.logsChannel
+    let authRoleId = settings.authRole
     const user = message.guild.member(message.mentions.users.first());
     const embedUser = user.user
     let muteRole = message.guild.roles.cache.find(r => r.name === 'muted');
     let reason = args.splice(1).join(' ') || 'Aucune raison spécifié'
 
-    if (authRoleId == undefined) {
+    if (authRoleId == 'none') {
         return message.reply('**Le serveur n\'a pas correctement été paramétré pour la commande `mute`**.\nVeuillez définir l\'id du rôle principal avec la commande `setauth`')
     } else {
         user.roles.add(authRoleId).catch((e) => console.log(e.message))
@@ -30,7 +26,7 @@ module.exports.run = async (client, message, args) => {
             .setFooter(`${message.author.username}`, message.author.displayAvatarURL())
             .setTimestamp();
         message.delete();
-        if (logsChannelId === undefined) {
+        if (logsChannelId === 'none') {
             message.channel.send(embed)
         } else {
             client.channels.cache.get(logsChannelId).send(embed)

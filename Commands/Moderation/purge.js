@@ -3,10 +3,8 @@ const {
     MessageEmbed
 } = require("discord.js");
 
-module.exports.run = async (client, message, args) => {
-    let {
-        logsChannelId
-    } = require('../Configuration/logsChannel.js')
+module.exports.run = async (client, message, args, settings) => {
+    let logsChannelId = settings.logsChannel
 
     if (isNaN(args[0]) || (args[0] < 1 || args[0] > 100)) {
         message.channel.send('Il faut spécifier un ***nombre*** entre 1 et 100')
@@ -23,7 +21,7 @@ module.exports.run = async (client, message, args) => {
             .setFooter(`${message.author.username}`, message.author.displayAvatarURL())
             .setTimestamp();
         message.delete()
-        if (logsChannelId === undefined) {
+        if (logsChannelId === 'none') {
             message.channel.send(embed)
                 .then(msg => {
                     msg.delete({

@@ -1,51 +1,36 @@
-const { MESSAGES } = require('../../Util/constants')
+const {
+    MESSAGES
+} = require('../../Util/constants')
 const {
     MessageEmbed
 } = require('discord.js');
 
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message, args, settings) => {
     message.delete()
     // Catch all server settings
-    let {
-        authChannelId
-    } = require('../Configuration/authChannel.js');
-    let {
-        authImage
-    } = require('../Configuration/authImage.js');
-    let {
-        authMessage
-    } = require('../Configuration/authMessage.js');
-    let {
-        authRoleId
-    } = require('../Configuration/authRole.js');
+    let authChannelId = settings.authChannel
+    let authImage = settings.authImage
+    let authMessage = settings.authMessage
+    let authRoleId = settings.authRole
 
-    let defaultGif = 'https://cdn.discordapp.com/attachments/650256233542189056/813809378327003176/hello.gif';
-    let clientGif = authImage;
-    console.log(clientGif);
-
-    console.log(authMessage);
     let embed = new MessageEmbed()
-    if (authChannelId === undefined) {
-        return message.channel.send('**Vous devez choisir le le salon qui recevra le message de bienvenue et accueillera vos membres, tapez\n `?authchannel <id_du_salon>` et réessayer.**')
+    if (authChannelId === 'none') {
+        return message.channel.send('**Vous devez choisir le le salon qui recevra le message de bienvenue et accueillera vos membres, tapez\n `?config authChannel <id_du_salon>` et réessayer.**')
     }
-    if (authRoleId === undefined) {
-        return message.channel.send('**Vous devez choisir le rôle par défaut qui permettra d\'accéder au serveur lors de son arrivée, veuillez entrer l\'id du rôle correspondant avec la commande\n `?authrole <id_du_role>` et réessayer.**')
+    if (authRoleId === 'none') {
+        return message.channel.send('**Vous devez choisir le rôle par défaut qui permettra d\'accéder au serveur lors de son arrivée, veuillez entrer l\'id du rôle correspondant avec la commande\n `?config authRole <id_du_role>` et réessayer.**')
     }
 
-    if (authMessage === undefined) {
-        return client.channels.cache.get(authChannelId).send('**Entrez un message de bienvenue pour votre serveur avec :**\n `?authmessage <message>`')
+    if (authMessage === 'none') {
+        return client.channels.cache.get(authChannelId).send('**Entrez un message de bienvenue pour votre serveur avec :**\n `?config authMessage <message>`')
     } else {
         embed.setDescription(`**${authMessage}** \n\n ||@everyone||`)
     }
 
-    if (clientGif === undefined) {
-        client.channels.cache.get(authChannelId).send('**Vous pouvez choisir définir votre image avec :**\n `?authimage <image_link>`')
-        embed.setImage(defaultGif)
-    } else {
-        embed.setImage(clientGif)
-    }
+    client.channels.cache.get(authChannelId).send('**Vous pouvez choisir définir votre image avec :**\n `?config authImage <image_link>`')
+    embed.setImage(authImage)
 
-    if ((authChannelId && authMessage !== undefined) && (clientGif || defaultGif !== undefined)) {
+    if ((authChannelId && authMessage !== 'none')) {
         client.channels.cache.get(authChannelId).send(embed).then(async msg => {
             await msg.react('✅');
             await msg.react('❌');

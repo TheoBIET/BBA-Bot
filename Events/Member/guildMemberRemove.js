@@ -3,11 +3,9 @@ const {
 } = require('discord.js');
 let moment = require('moment')
 
-module.exports = (client, member) => {
-    let {
-        logsChannelId
-    } = require('../../Commands/Configuration/logsChannel')
-    console.log(`${member.user}`);
+module.exports = async (client, member) => {
+    const settings = await client.getGuild(member.guild);
+    let logsChannelId = settings.logsChannel
     let counter = member.guild.memberCount
     const embed = new MessageEmbed()
         .setColor('#FF0000')
@@ -24,7 +22,7 @@ module.exports = (client, member) => {
             inline: true
         }, )
         .setTimestamp()
-    if (logsChannelId !== undefined) {
+    if (logsChannelId !== 'none') {
         client.channels.cache.get(logsChannelId).send(embed)
     }
 }

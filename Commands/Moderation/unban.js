@@ -3,10 +3,8 @@ const {
     MessageEmbed
 } = require("discord.js");
 
-module.exports.run = async (client, message, args) => {
-    let {
-        logsChannelId
-    } = require('../Configuration/logsChannel.js')
+module.exports.run = async (client, message, args, settings) => {
+    let logsChannelId = settings.logsChannel
     let user = await client.users.fetch(args[0])
 
     if (user) {
@@ -19,7 +17,7 @@ module.exports.run = async (client, message, args) => {
                     .setFooter(`${message.author.username}`, message.author.displayAvatarURL())
                     .setTimestamp();
                 message.delete()
-                if (logsChannelId === undefined) {
+                if (logsChannelId === 'none') {
                     message.channel.send(embed)
                 } else {
                     client.channels.cache.get(logsChannelId).send(embed)

@@ -3,9 +3,8 @@ const {
 } = require('discord.js')
 
 module.exports = async (client, channel) => {
-    let {
-        logsChannelId
-    } = require('../../Commands/Configuration/logsChannel')
+    const settings = await client.getGuild(channel.guild);
+    let logsChannelId = settings.logsChannel
     if (channel.type === 'dm') return
     else {
         const fetchGuildAuditLogs = await channel.guild.fetchAuditLogs({
@@ -33,7 +32,7 @@ module.exports = async (client, channel) => {
             .setThumbnail(executor.displayAvatarURL())
             .setFooter(`${executor.username}`)
             .setTimestamp();
-        if (logsChannelId !== undefined) {
+        if (logsChannelId !== 'none') {
             client.channels.cache.get(logsChannelId).send(embed)
         }
 

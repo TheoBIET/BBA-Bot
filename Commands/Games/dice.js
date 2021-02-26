@@ -1,6 +1,6 @@
 const { MESSAGES } = require('../../Util/constants')
 
-module.exports.run = (client, message, args) => {
+module.exports.run = (client, message, args, settings) => {
     const {
         MessageEmbed
     } = require("discord.js");

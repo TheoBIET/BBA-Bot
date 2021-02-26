@@ -9,14 +9,38 @@ const guildSchema = mongoose.Schema({
         'type': String,
         'default': defaults.prefix
     },
-    logChannel: {
+    authChannel: {
         'type': String,
-        'default': defaults.logChannel
+        'default': defaults.authChannel
+    },
+    authImage: {
+        'type': String,
+        'default': defaults.authImage
+    },
+    authMessage: {
+        'type': String,
+        'default': defaults.authMessage
+    },
+    authRole: {
+        'type': String,
+        'default': defaults.authRole
+    },
+    logsChannel: {
+        'type': String,
+        'default': defaults.logsChannel
+    },
+    muteChannel: {
+        'type': String,
+        'default': defaults.muteChannel
+    },
+    welcomeChannel: {
+        'type': String,
+        'default': defaults.welcomeChannel
     },
     welcomeMessage: {
         'type': String,
-        'default': defaults.logChannel
-    }
+        'default': defaults.welcomeMessage
+    },
 });
 
 module.exports = mongoose.model("Guild", guildSchema)

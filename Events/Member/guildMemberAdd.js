@@ -1,15 +1,13 @@
 const {
     MessageEmbed
 } = require('discord.js');
-let moment = require('moment')
+let moment = require('moment');
+const message = require('../Message/message');
 
-module.exports = (client, member) => {
-    let {
-        welcomeChannelId
-    } = require('../../Commands/Configuration/authChannel')
-    let {
-        logsChannelId
-    } = require('../../Commands/Configuration/logsChannel')
+module.exports = async (client, member) => {
+    const settings = await client.getGuild(member.guild);
+    let welcomeChannelId = settings.welcomeChannel
+    let logsChannelId = settings.logsChannel
     let counter
 
     // On compte le nombre de membre, selon le nombre on utilise son abréviation numérale
@@ -23,10 +21,11 @@ module.exports = (client, member) => {
             ADJ = "ème"
         } else if (Num == "0") {
             ADJ = "ième"
-        }
+        };
         counter = memberCount + ADJ
-    }
+    };
 
+    console.log(welcomeChannelId);
     Counter(member.guild.memberCount)
     const embed = new MessageEmbed()
         .setColor('32CD32')
@@ -43,11 +42,12 @@ module.exports = (client, member) => {
             inline: true
         }, )
         .setTimestamp()
-    if (welcomeChannelId !== undefined) {
+    if (welcomeChannelId !== 'none') {
         client.channels.cache.get(welcomeChannelId).send(embed)
     } else {
-        if (logsChannelId !== undefined) {
+        if (logsChannelId !== 'none') {
             client.channels.cache.get(logsChannelId).send(embed)
-        }
-    }
-}
+        };
+    };
+    //811730153394274345
+};
