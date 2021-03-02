@@ -2,7 +2,6 @@ const {
     MessageEmbed
 } = require('discord.js');
 let moment = require('moment');
-const message = require('../Message/message');
 
 module.exports = async (client, member) => {
     const settings = await client.getGuild(member.guild);
@@ -33,14 +32,10 @@ module.exports = async (client, member) => {
         .setTitle(`Bienvenue sur ${member.guild.name}!`)
         .setDescription(`${member} tu es la ${counter} personne à nous rejoindre`)
         .addFields({
-            name: 'Invité par',
-            value: 'In coding',
-            inline: true
-        }, {
             name: 'Compte créé le',
             value: `${moment(member.user.createdAt).locale("fr").format('Do MMMM YYYY')}`,
             inline: true
-        }, )
+        } )
         .setTimestamp()
     if (welcomeChannelId !== 'none') {
         client.channels.cache.get(welcomeChannelId).send(embed)
@@ -49,5 +44,14 @@ module.exports = async (client, member) => {
             client.channels.cache.get(logsChannelId).send(embed)
         };
     };
-    //811730153394274345
+    
+    const newUser = {
+        guildID: member.guild.id,
+        guildName: member.guild.name,
+        userID: member.user.id,
+        username: member.user.tag,
+    };
+
+    await client.createUser(newUser);
+    
 };
