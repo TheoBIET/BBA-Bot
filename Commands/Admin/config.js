@@ -48,25 +48,25 @@ module.exports.run = async (client, message, args, settings) => {
       case 'logsChannel' : {
         if (newSetting) {
             await client.updateGuild(message.guild, { logsChannel: newSetting });
-            return message.channel.send(`**Salon de logs mis à jour :** \`${settings.logsChannel}\` ➜ \`${newSetting}\``);
+            return message.channel.send(`**Salon de logs mis à jour :** \`<#${settings.logsChannel}>\` ➜ \`<#${newSetting}>\``);
         };
-        message.channel.send(`**Salon de logs actuel :** \`${settings.logsChannel}\``)
+        message.channel.send(`**Salon de logs actuel :** \`<#${settings.logsChannel}>\``)
         break
       };
       case 'muteChannel' : {
         if (newSetting) {
             await client.updateGuild(message.guild, { muteChannel: newSetting });
-            return message.channel.send(`**Salon MUTE mis à jour :** \`${settings.muteChannel}\` ➜ \`${newSetting}\``);
+            return message.channel.send(`**Salon MUTE mis à jour :** \`<#${settings.muteChannel}>\` ➜ \`<#${newSetting}>\``);
         };
-        message.channel.send(`**Salon MUTE actuel :** \`${settings.muteChannel}\``)
+        message.channel.send(`**Salon MUTE actuel :** \`<#${settings.muteChannel}>\``)
         break
       };
       case 'welcomeChannel' : {
         if (newSetting) {
             await client.updateGuild(message.guild, { welcomeChannel: newSetting });
-            return message.channel.send(`**Salon de bienvenue mis à jour :** \`${settings.welcomeChannel}\` ➜ \`${newSetting}\``);
+            return message.channel.send(`**Salon de bienvenue mis à jour :** \`<#${settings.welcomeChannel}>\` ➜ \`<#${newSetting}>\``);
         };
-        message.channel.send(`**Salon de bienvenue actuel :** \`${settings.welcomeChannel}\``)
+        message.channel.send(`**Salon de bienvenue actuel :** \`<#${settings.welcomeChannel}>\``)
         break
       };
   };

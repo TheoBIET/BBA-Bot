@@ -1,6 +1,6 @@
 {
-  "name": "bba-corp",
-  "version": "1.0.0",
+  "name": "yumeko",
+  "version": "0.7.1",
   "description": "Multifunctionnal Discord Bot, make for have a better JavaScript before study :)",
   "main": "main.js",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/TheoBIET/BBA-Bot.git"
+    "url": ""
   },
   "author": "ƊɑѵƊɑѵ#5517",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TheoBIET/BBA-Bot/issues"
+    "url": "http://*"
   },
-  "homepage": "https://github.com/TheoBIET/BBA-Bot#readme",
+  "homepage": "",
   "dependencies": {
     "discord.js": "^12.5.1",
     "moment": "^2.29.1",
