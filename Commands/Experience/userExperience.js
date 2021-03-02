@@ -11,8 +11,8 @@ module.exports.run = async (client, message, args, settings, dbUser) => {
             return message.reply(`${ user } possède ${ dbMentionUser.experience } points d'expériences`);
         }else {
             message.channel.send(`L'utilisateur mentionné n'existe pas \`${ settings.prefix }help experience\``);
-        }
-    }
+        };
+    };
 };
 
-module.exports.help = MESSAGES.COMMANDS.EXPERIENCE.USEREXPERIENCE
+module.exports.help = MESSAGES.COMMANDS.EXPERIENCE.USEREXPERIENCE;

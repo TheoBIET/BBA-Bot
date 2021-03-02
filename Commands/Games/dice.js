@@ -33,8 +33,8 @@ module.exports.run = (client, message, args, settings) => {
             value: result,
             inline: true
         }, );
-    message.delete()
-    message.channel.send(embed)
+    message.delete();
+    message.channel.send(embed);
 };
 
-module.exports.help = MESSAGES.COMMANDS.GAMES.DICE
+module.exports.help = MESSAGES.COMMANDS.GAMES.DICE;

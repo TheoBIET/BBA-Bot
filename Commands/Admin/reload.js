@@ -5,7 +5,7 @@ const {
 } = require("discord.js");
 
 module.exports.run = async (client, message, args, settings) => {
-    let logsChannelId = settings.logsChannel
+    let logsChannelId = settings.logsChannel;
 
     await message.delete();
 
@@ -18,12 +18,12 @@ module.exports.run = async (client, message, args, settings) => {
             .setTimestamp();
 
     if(logsChannelId === 'none') {
-        await message.channel.send(embed)
+        await message.channel.send(embed);
     }else {
-        await client.channels.cache.get(logsChannelId).send(embed)
-    }
+        await client.channels.cache.get(logsChannelId).send(embed);
+    };
 
     process.exit();
 }
 
-module.exports.help = MESSAGES.COMMANDS.ADMIN.RELOAD
+module.exports.help = MESSAGES.COMMANDS.ADMIN.RELOAD;

@@ -27,13 +27,13 @@ module.exports.run = async (client, message, args, settings) => {
             .setTimestamp();
         message.delete();
         if (logsChannelId === 'none') {
-            message.channel.send(embed)
+            message.channel.send(embed);
         } else {
-            client.channels.cache.get(logsChannelId).send(embed)
+            client.channels.cache.get(logsChannelId).send(embed);
         }
     } else {
         message.channel.send('L\'utilisateur mentionné n\'existe pas, veuillez réessayer');
     };
 };
 
-module.exports.help = MESSAGES.COMMANDS.MODERATION.UNMUTE
+module.exports.help = MESSAGES.COMMANDS.MODERATION.UNMUTE;

@@ -3,7 +3,7 @@ const {
 } = require('discord.js');
 const {
     MESSAGES
-} = require('../../Util/constants')
+} = require('../../Util/constants');
 const moment = require('moment');
 
 module.exports.run = (client, message, args, settings) => {
@@ -68,8 +68,8 @@ module.exports.run = (client, message, args, settings) => {
                     },
                 )
                 .setFooter('Codé par ƊɑѵƊɑѵ#5517')
-                .setTimestamp()
-            message.channel.send(embed)
+                .setTimestamp();
+            message.channel.send(embed);
         });
     } else if (user) {
         const User = Guild.members.cache.find(usr => usr.id === user.id);
@@ -79,7 +79,7 @@ module.exports.run = (client, message, args, settings) => {
             "dnd": "⛔ Ne pas déranger",
             "idle": "🌙 AFK",
             "offline": "⚫ Déconnecté"
-        }
+        };
 
         const embed = new MessageEmbed()        
         .setAuthor(`Statistiques de ${ User.user.username }`, User.user.displayAvatarURL())
@@ -107,11 +107,11 @@ module.exports.run = (client, message, args, settings) => {
                 value: `${ User._roles.map(role => "<@&" + role + ">" ).join(' ') }`,
                 inline: false
             },
-        )
-        message.channel.send(embed)
-} else {
-    message.channel.send(`L\'utilisateur mentionné n\'existe pas \`${settings.prefix}help stats\``)
-}
-}
+        );
+        message.channel.send(embed);
+    } else {
+        message.channel.send(`L\'utilisateur mentionné n\'existe pas \`${settings.prefix}help stats\``);
+    };
+};
 
 module.exports.help = MESSAGES.COMMANDS.MISCELLANEOUS.STATS;

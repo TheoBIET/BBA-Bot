@@ -1,6 +1,6 @@
 const {
     MESSAGES
-} = require('../../Util/constants')
+} = require('../../Util/constants');
 
 // Introduction to collector for future quizz?
 module.exports.run = (client, message, args, settings) => {
@@ -15,7 +15,7 @@ module.exports.run = (client, message, args, settings) => {
                 })
                 .then(collected => {
                     message.channel.send(`${collected.size} messages collectés.`)
-                })
+                });
         });
 
     /*  collector.on('end', collected => {

@@ -1,17 +1,17 @@
-const { MESSAGES } = require('../../Util/constants')
+const { MESSAGES } = require('../../Util/constants');
 const ms = require('ms');
 const {
     MessageEmbed
 } = require("discord.js");
 
 module.exports.run = async (client, message, args, settings) => {
-    let letChannelId = settings.logChannel
-    let authRoleId = settings.authRole
+    let logsChannelId = settings.logChannel;
+    let authRoleId = settings.authRole;
     const user = message.guild.member(message.mentions.users.first());
-    const embedUser = user.user
+    const embedUser = user.user;
     let muteRole = message.guild.roles.cache.find(r => r.name === 'muted');
-    let muteTime = (args[1])
-    let reason = args[1] == muteTime ? args.splice(2).join(' ') || 'Aucune raison spécifié' : args.splice(1).join(' ') || 'Aucune raison spécifié'
+    let muteTime = (args[1]);
+    let reason = args[1] == muteTime ? args.splice(2).join(' ') || 'Aucune raison spécifié' : args.splice(1).join(' ') || 'Aucune raison spécifié';
 
     if (!muteRole) {
         muteRole = await message.guild.roles.create({
@@ -33,11 +33,11 @@ module.exports.run = async (client, message, args, settings) => {
     };
 
     if (authRoleId == 'none') {
-        return message.reply('**Le serveur n\'a pas correctement été paramétré pour la commande `mute`**.\nVeuillez définir l\'id du rôle principal avec la commande `setauth`')
+        return message.reply(`**Le serveur n\'a pas correctement été paramétré pour la commande \`mute\`**.\nVeuillez définir l\'id du rôle principal avec la commande \`${settings.prefix}config authChannel <channel_id>\``);
     } else {
-        await user.roles.remove(authRoleId).catch((e) => console.log(e.message))
+        await user.roles.remove(authRoleId).catch((e) => console.log(e.message));
     }
-    await user.roles.add(muteRole).catch((e) => console.log(e.message))
+    await user.roles.add(muteRole).catch((e) => console.log(e.message));
 
     if (user) {
         let embed = new MessageEmbed()
@@ -49,17 +49,17 @@ module.exports.run = async (client, message, args, settings) => {
             .setTimestamp();
         message.delete();
         if (logsChannelId === 'none') {
-            message.channel.send(embed)
+            message.channel.send(embed);
         } else {
-            client.channels.cache.get(logsChannelId).send(embed)
-        }
-    }
+            client.channels.cache.get(logsChannelId).send(embed);
+        };
+    };
 
     setTimeout(() => {
         console.log('removed');
-        user.roles.remove(muteRole.id)
+        user.roles.remove(muteRole.id);
         if (user) {
-            console.log('User ' + user)
+            console.log('User ' + user);
             console.log('Role ' + muteRole);
             let embed = new MessageEmbed()
                 .setColor(`#050505`)
@@ -69,9 +69,9 @@ module.exports.run = async (client, message, args, settings) => {
                 .setFooter(`${message.author.username}`, message.author.displayAvatarURL())
                 .setTimestamp();
             if (logsChannelId === undefined) {
-                message.channel.send(embed)
+                message.channel.send(embed);
             } else {
-                client.channels.cache.get(logsChannelId).send(embed)
+                client.channels.cache.get(logsChannelId).send(embed);
             }
         } else {
             message.channel.send('L\'utilisateur mentionné n\'existe pas, veuillez réessayer');
@@ -80,4 +80,4 @@ module.exports.run = async (client, message, args, settings) => {
 
 };
 
-module.exports.help = MESSAGES.COMMANDS.MODERATION.MUTE
+module.exports.help = MESSAGES.COMMANDS.MODERATION.MUTE;

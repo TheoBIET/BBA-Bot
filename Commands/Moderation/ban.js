@@ -1,11 +1,11 @@
-const { MESSAGES } = require('../../Util/constants')
+const { MESSAGES } = require('../../Util/constants');
 
 const {
     MessageEmbed
 } = require("discord.js");
 
 module.exports.run = (client, message, args, settings) => {
-    let logsChannelId = settings.logsChannel
+    let logsChannelId = settings.logsChannel;
     const user = message.mentions.users.first();
     let reason = args.splice(1).join(' ') || 'Aucune raison spécifiée';
 
@@ -17,18 +17,18 @@ module.exports.run = (client, message, args, settings) => {
             .setThumbnail(user.displayAvatarURL())
             .setFooter(`${message.author.username}`, message.author.displayAvatarURL())
             .setTimestamp();
-        message.delete()
+        message.delete();
         if(logsChannelId === 'none') {
-            message.channel.send(embed)
+            message.channel.send(embed);
         }else {
-            client.channels.cache.get(logsChannelId).send(embed)
-        }
+            client.channels.cache.get(logsChannelId).send(embed);
+        };
         message.guild.member(user).ban({
             reason: reason
         });
     }else {
         message.channel.send('L\'utilisateur mentionné n\'existe pas, veuillez réessayer');
-    }
-}
+    };
+};
 
-module.exports.help = MESSAGES.COMMANDS.MODERATION.BAN
+module.exports.help = MESSAGES.COMMANDS.MODERATION.BAN;

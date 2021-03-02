@@ -13,26 +13,26 @@ module.exports.run = (client, message, args) => {
             .then(msg => {
                 msg.delete({
                     timeout: 5000
-                })
-            })
+                });
+            });
         } else {
             client.addExp(client, user, expToAdd);
             message.channel.send(`Vous avez ajouté ${ expToAdd } points d'expérience à ${ user }`)
                 .then(msg => {
                     msg.delete({
                         timeout: 5000
-                    })
-                })
-        }
+                    });
+                });
+        };
 
     } else {
         message.channel.send(`Il faut mentionner un utilisateur! \`${ settings.prefix }help removeexperience\``)
             .then(msg => {
                 msg.delete({
                     timeout: 5000
-                })
-            })
-    }
-}
+                });
+            });
+    };
+};
 
-module.exports.help = MESSAGES.COMMANDS.EXPERIENCE.ADDEXPERIENCE
+module.exports.help = MESSAGES.COMMANDS.EXPERIENCE.ADDEXPERIENCE;
