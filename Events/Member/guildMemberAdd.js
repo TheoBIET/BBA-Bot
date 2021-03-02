@@ -44,14 +44,12 @@ module.exports = async (client, member) => {
             client.channels.cache.get(logsChannelId).send(embed)
         };
     };
-    
-    const newUser = {
+
+    await client.createUser({
         guildID: member.guild.id,
         guildName: member.guild.name,
         userID: member.user.id,
         username: member.user.tag,
-    };
-
-    await client.createUser(newUser);
+    });
     
 };

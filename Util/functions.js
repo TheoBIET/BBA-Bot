@@ -51,4 +51,16 @@ module.exports = async client => {
         return data.updateOne(settings)
     };
 
+    client.addExp = async (client, member, exp) => {
+        const userToUpdate = await client.getUser(member);
+        const updatedExp = userToUpdate.experience + exp;
+        await client.updateUser(member, { experience: updatedExp });
+    };
+
+    client.removeExp = async (client, member, exp) => {
+        const userToUpdate = await client.getUser(member);
+        const updatedExp = userToUpdate.experience - exp;
+        await client.updateUser(member, { experience: updatedExp });
+    };
+
 };

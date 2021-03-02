@@ -4,11 +4,33 @@ const {
 } = require('discord.js');
 
 module.exports = async (client, message) => {
-    if (message.channel.type === 'dm') return client.emit('directMessage', message)
-    // Si les messages ne commencent pas par le préfixe, ou qu'ils ont été envoyés par le BOT, on les ignore
     const settings = await client.getGuild(message.guild);
+    const dbUser = await client.getUser(message.member)
+    if (message.channel.type === 'dm') return client.emit('directMessage', message)
 
-    if (!message.content.startsWith(settings.prefix) || message.author.bot) return;
+    if (message.author.bot) return;
+
+    if (!dbUser) await client.createUser({
+        guildID: message.member.guild.id,
+        guildName: message.member.guild.name,
+        userID: message.member.user.id,
+        username: message.member.user.tag,
+    });
+
+    const expCd = Math.floor(Math.random() * 19) + 1;
+    const expToAdd = Math.floor(Math.random() * 25) + 10;
+
+    if (expCd >= 7 && expCd <= 10) {
+        await client.addExp(client, message.member, expToAdd);
+    }
+
+    const userLevel = Math.floor(0.15 * Math.sqrt(dbUser.experience));
+    if (dbUser.level < userLevel){
+        message.reply(`Félicitations! Tu viens de monter **niveau ${ userLevel }** avec Yumeko!`)
+        client.updateUser(message.member, { level: userLevel })
+    };
+
+    if (!message.content.startsWith(settings.prefix)) return;
 
     const args = message.content.slice(settings.prefix.length).split(/ +/);
     //console.log(args.splice(1).join(' '));
@@ -71,6 +93,6 @@ module.exports = async (client, message) => {
     tStamps.set(message.author.id, timeNow)
     setTimeout(() => tStamps.delete(message.author.id), cdAmount)
 
-    command.run(client, message, args, settings)
+    command.run(client, message, args, settings, dbUser)
 
 }

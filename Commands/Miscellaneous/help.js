@@ -18,6 +18,9 @@ module.exports.run = (client, message, args, settings) => {
         case 'collectors': {
             return '📊 | EXPERIMENTAL | Collecteurs (en développement)'
         };
+        case 'experience': {
+            return '⭐ | Expérience (en développement)'
+        };
         case 'games': {
             return '🎲 | Jeux'
         };
