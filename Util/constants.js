@@ -315,7 +315,7 @@ const MESSAGES = {
                 aliases: ['music', 'm'],
                 category: 'music',
                 description: 'Joue une musique dans un salon vocal',
-                cooldown: 10,
+                cooldown: 0,
                 usage: '<nom_de_la_musique>',
                 isUserAdmin: false,
                 permissions: true,
