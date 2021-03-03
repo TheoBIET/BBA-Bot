@@ -11,18 +11,18 @@ You can freely retrieve the source code, modify it and host it on your own.
 * A lot of **configurable** options and EXP system!
 * Around 50 commands (**music, moderation, random image, miscellaneous,...**)!
 
+<span>Regularly, new commands and updates are added. If you have troubles, contact me via Discord. I will try to fix the problem as soon as possible.</span>
 <p align="center">
-Regularly, new commands and updates are added. If you have troubles, contact me via Discord. I will try to fix the problem as soon as possible.
 <img src="https://cdn.discordapp.com/attachments/685246279495712889/816680717169721374/unknown.png" alt="?about">
 </p>
 
-
-I tried to be original in the 'design' of the bot with well-worked embeds, such as the statistics system which is really complete
+<span>I tried to be original in the 'design' of the bot with well-worked embeds, such as the statistics system which is really complete</span>
+<p align="center">
     <img src="https://cdn.discordapp.com/attachments/685246279495712889/816683050812440606/unknown.png">
     <img src="https://cdn.discordapp.com/attachments/685246279495712889/816683050812440606/unknown.png">
 </p>
 
+<span>Actually, i'm trying to improve the music system. You can use it now, but you may encounter some harmless problems</span>
 <p align="center">
-Actually, i'm trying to improve the music system. You can use it now, but you may encounter some harmless problems
 <img src="https://cdn.discordapp.com/attachments/685246279495712889/816682150451347496/unknown.png" alt="Music system">
 </p>
