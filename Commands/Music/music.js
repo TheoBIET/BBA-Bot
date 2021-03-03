@@ -39,7 +39,7 @@ module.exports.run = async (client, message, args, settings) => {
     else if(args[0] === 'skip') {
         return skip_song(message, server_queue)
     }
-    else if(args[0] === 'quit') {
+    else if(args[0] === 'leave') {
         return stop_song(message, server_queue)
     }
     else if(args[0] === 'clear') {
@@ -155,7 +155,6 @@ const video_player = async (guild, song, info) => {
             song_queue.songs.shift();
             video_player(guild, song_queue.songs[0]);
         });
-    console.log(info)
     if(info.title){
         const embed = new MessageEmbed()
             .setTitle(`${info.title}`)
@@ -192,7 +191,7 @@ const skip_song = (message, server_queue) => {
         return message.channel.send(`Il n'y a pas de musiques dans la file d'attente 😔`);
     }
     if (message.guild.voiceConnection){return message.channel.send('Le bot n\'est pas connecté')}
-    else {
+    else if (server_queue.songs != []){
         message.channel.send('🎶 Musique suivante').then(msg => msg.delete({timeout:2000}))
         server_queue.connection.dispatcher.end();
     };
@@ -207,7 +206,10 @@ const stop_song = (message, server_queue) => {
 const clear_queue = (message, server_queue) => {
     if (!message.member.voice.channel) return message.channel.send(`Vous devez être dans un salon vocal pour utiliser la commande \`${settings.prefix}play quit\`!`);
     if (message.guild.voiceConnection){return message.channel.send('Le bot n\'est pas connecté')}
-    if (server_queue.songs){server_queue.songs = []};
+    if (server_queue.songs){
+        message.channel.send('La file d\'attente est désormais vide!')
+        server_queue.songs = []
+    };
 };
 
 module.exports.help = MESSAGES.COMMANDS.MUSIC.MUSIC;
