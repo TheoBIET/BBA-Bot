@@ -85,7 +85,7 @@ module.exports = async (client, message) => {
         // Si l'utilisateur tente d'utiliser la commande alors que le cooldown n'est pas terminé, alors on l'informe du temps restant
         if (timeNow < cdExpirationTime) {
             timeLeft = (cdExpirationTime - timeNow) / 1000
-            return message.reply(`Merci d'attendre ${timeLeft.toFixed(0)} seconde(s) avant de réutiliser la commande **${command.help.name}**`);
+            return message.reply(`Merci d'attendre ${timeLeft.toFixed(0)} seconde(s) avant de réutiliser la commande **${command.help.name}**`).then(msg => msg.delete({timeout:3000}));
         };
     };
 

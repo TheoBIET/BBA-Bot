@@ -18,7 +18,14 @@ module.exports = async (client, message) => {
         .setAuthor(`Un message a été supprimé par ${executor.username}!`)
         .setThumbnail(executor.displayAvatarURL())
         .setTimestamp();
-    if (logsChannelId !== 'none') {
-        client.channels.cache.get(logsChannelId).send(embed)
+    if (executor.username != client.username && content !== 'Inconnu') {
+        if (logsChannelId !== 'none') {
+            client.channels.cache.get(logsChannelId).send(embed)
+                .then(msg => {
+                    msg.delete({
+                        timeout: 5000
+                    });
+                });
+        }
     }
 }

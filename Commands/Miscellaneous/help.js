@@ -16,10 +16,10 @@ module.exports.run = (client, message, args, settings) => {
             return '👑 | Administration'
         };
         case 'collectors': {
-            return '📊 | EXPERIMENTAL | Collecteurs (en développement)'
+            return '📊 | Collecteurs (en développement)'
         };
         case 'experience': {
-            return '⭐ | Expérience (en développement)'
+            return '⭐ | Expérience'
         };
         case 'games': {
             return '🎲 | Jeux'
@@ -29,6 +29,9 @@ module.exports.run = (client, message, args, settings) => {
         };
         case 'moderation': {
             return '⚖️ | Modération'
+        };
+        case 'randomimage': {
+            return '📷 | Images aléatoires'
         };
         case 'reactions': {
             return '🙂 | Rôle via réactions'
