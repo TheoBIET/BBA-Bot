@@ -61,7 +61,7 @@ You can freely retrieve the source code, modify it and host it on your own.
 ### STEPS
 - 1 | Star & Fork the repository https://github.com/TheoBIET/Yumeko \n
 - 2 | Download the source code on your computer
-- 3 | In terminal, run `npm init`
+- 3 | In terminal, run `npm i`
 - 4 | Generate a BOT Token on https://discord.com/developers/applications and click "New Application"
 - 5 | Install MongoDB and create a local database or a cloud-hosted with https://www.mongodb.com/cloud/atlas/
 - 6 | Open Assets folder and and get the config-example.js file
