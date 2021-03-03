@@ -12,7 +12,7 @@ You can freely retrieve the source code, modify it and host it on your own.
 * Around 50 commands (**music, moderation, random image, miscellaneous,...**)!
 
 Regularly, new commands and updates are added. If you have troubles, contact me via Discord. I will try to fix the problem as soon as possible.
-<img src="https://cdn.discordapp.com/attachments/685246279495712889/816680717169721374/unknown.png" alt="?about>
+<img src="https://cdn.discordapp.com/attachments/685246279495712889/816680717169721374/unknown.png" alt="?about">
 
 I tried to be original in the 'design' of the bot with well-worked embeds, such as the statistics system which is really complete
 <img src="https://cdn.discordapp.com/attachments/685246279495712889/816683050812440606/unknown.png">
