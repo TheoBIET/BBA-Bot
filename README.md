@@ -15,8 +15,8 @@ Regularly, new commands and updates are added. If you have troubles, contact me 
 <img src="https://cdn.discordapp.com/attachments/685246279495712889/816680717169721374/unknown.png" alt="?about>
 
 I tried to be original in the 'design' of the bot with well-worked embeds, such as the statistics system which is really complete
-<img src="https://cdn.discordapp.com/attachments/685246279495712889/816683050812440606/unknown.png"
-<img src="https://cdn.discordapp.com/attachments/685246279495712889/816683050812440606/unknown.png"
+<img src="https://cdn.discordapp.com/attachments/685246279495712889/816683050812440606/unknown.png">
+<img src="https://cdn.discordapp.com/attachments/685246279495712889/816683050812440606/unknown.png">
 
 Actually, i'm trying to improve the music system. You can use it now, but you may encounter some harmless problems
 <img src="https://cdn.discordapp.com/attachments/685246279495712889/816682150451347496/unknown.png" alt="Music system">
