@@ -34,6 +34,7 @@ module.exports.run = (client, message, args, settings) => {
             🤖 \`Discord.js 12.5.1\`
             🍃 \`Mongodb 3.6.3\`
             🕐 \`Moment 3.6.3\`
+            🎵 \`ytdl-core 4.5.0\`
             `, inline: true },
             { name:'📣 | Support', value:`ƊɑѵƊɑѵ#5517`, inline: true },
             { name:'📉 | Mémoire utilisée', value:`${(process.memoryUsage().heapUsed / 1024 / 1024 ).toFixed(2)}Mo`, inline: true },

@@ -1,13 +1,16 @@
+const config = require('../../config');
+
 module.exports = (client) => {
+   
     // Mise à jour rapides des informations du BOT
-    //client.user.setUsername('蛇喰 夢子').catch(console.error); 
-    console.log(`${client.user.tag} connecté.`);
-    //client.user.setAvatar('https://cdn.discordapp.com/attachments/644569508337549324/809504010649862155/1016983c9d7552e6.png');
-    client.user.setPresence({ 
+    console.log(`Prêt à modérer les ${ client.users.cache.size } utilisateurs de ${ client.user.tag } sur les ${ client.guilds.cache.size } serveurs!`);
+    let activities = ['?help', `${ client.users.cache.size } utilisateurs`, `${ client.guilds.cache.size } serveurs`, `ƊɑѵƊɑѵ me coder`], i=0;
+    setInterval(() => client.user.setPresence({ 
         activity: { 
-            name : 'ƊɑѵƊɑѵ me coder', 
+            name : `${activities[i++ % activities.length]}`, 
             type : 'WATCHING'
         },
         status: 'dnd'
-    });
-}
+    }), 3000);
+
+};

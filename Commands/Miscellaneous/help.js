@@ -30,6 +30,9 @@ module.exports.run = (client, message, args, settings) => {
         case 'moderation': {
             return '⚖️ | Modération'
         };
+        case 'music': {
+            return '🎵 | Musique & Soundbox'
+        };
         case 'randomimage': {
             return '📷 | Images aléatoires'
         };

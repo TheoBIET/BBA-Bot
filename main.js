@@ -6,10 +6,11 @@ const {
     loadCommands,
     loadEvents
 } = require('./Util/loader');
-
+const { CommandoClient } = require('discord.js-commando')
 const client = new Client();
+
 require('./Util/functions')(client);
-['commands', 'cooldowns'].forEach(x => client[x] = new Collection());
+['commands', 'cooldowns', 'musicPlayer'].forEach(x => client[x] = new Collection());
 
 client.config = require('./config');
 client.mongoose = require('./Util/mongoose');
