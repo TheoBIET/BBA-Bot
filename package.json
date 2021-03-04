@@ -19,6 +19,7 @@
   "homepage": "",
   "dependencies": {
     "@discordjs/opus": "github:discordjs/opus",
+    "@vitalets/google-translate-api": "github:vitalets/google-translate-api",
     "discord.js": "^12.5.1",
     "discord.js-commando": "github:discordjs/Commando",
     "erela.js": "^2.3.2",

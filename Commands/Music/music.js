@@ -14,7 +14,7 @@ let currentInfo = {};
 
 module.exports.run = async (client, message, args, settings) => {
     const voice_channel = message.member.voice.channel;
-    if (!voice_channel) return message.channel.send(`Vous devez être dans un salon vocal pour utiliser la commande \`${settings.prefix}play\`!`);
+    if (!voice_channel) return message.channel.send(`Vous devez être dans un salon vocal pour utiliser la commande \`${settings.prefix}music\`!`);
     const permissions = voice_channel.permissionsFor(message.client.user);
     if (!permissions.has('CONNECT')) return message.channel.send('Vous ne possédez pas les permissions requises!');
     if (!permissions.has('SPEAK')) return message.channel.send('Vous ne possédez pas les permissions requises!');
