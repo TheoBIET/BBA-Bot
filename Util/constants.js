@@ -251,6 +251,17 @@ const MESSAGES = {
                 permissions: false,
                 args: true,
             },
+            WEATHER: {
+                name: 'weather',
+                aliases: ['weather'],
+                category: 'miscellaneous',
+                description: 'Renvoie la météo d\'une ville donnée',
+                cooldown: 3,
+                usage: '<ville>',
+                isUserAdmin: false,
+                permissions: false,
+                args: true,
+            },
         },
         MODERATION: {
             AUTH: {
