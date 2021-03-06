@@ -37,4 +37,4 @@ module.exports.run = (client, message, args, settings) => {
     message.channel.send(embed);
 };
 
-module.exports.help = MESSAGES.COMMANDS.GAMES.DICE;
+module.exports.help = MESSAGES.COMMANDS.MISCELLANEOUS.DICE;

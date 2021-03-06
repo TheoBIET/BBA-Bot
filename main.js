@@ -6,7 +6,6 @@ const {
     loadCommands,
     loadEvents
 } = require('./Util/loader');
-const { CommandoClient } = require('discord.js-commando')
 const client = new Client();
 
 require('./Util/functions')(client);

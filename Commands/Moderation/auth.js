@@ -39,4 +39,4 @@ module.exports.run = async (client, message, args, settings) => {
 };
 
 
-module.exports.help = MESSAGES.COMMANDS.REACTIONS.AUTH;
+module.exports.help = MESSAGES.COMMANDS.MODERATION.AUTH;

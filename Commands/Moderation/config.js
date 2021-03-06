@@ -72,4 +72,4 @@ module.exports.run = async (client, message, args, settings) => {
   };
 };
  
-module.exports.help = MESSAGES.COMMANDS.ADMIN.CONFIG;
+module.exports.help = MESSAGES.COMMANDS.MODERATION.CONFIG;

@@ -21,8 +21,8 @@ module.exports.run = (client, message, args, settings) => {
         case 'experience': {
             return '⭐ | Expérience'
         };
-        case 'games': {
-            return '🎲 | Jeux'
+        case 'gametracker': {
+            return '⭐ | Statistiques de Jeux'
         };
         case 'miscellaneous': {
             return '🎨 | Divers'
@@ -35,9 +35,6 @@ module.exports.run = (client, message, args, settings) => {
         };
         case 'randomimage': {
             return '📷 | Images aléatoires'
-        };
-        case 'reactions': {
-            return '🙂 | Rôle via réactions'
         };
         default:
             return 'Error';

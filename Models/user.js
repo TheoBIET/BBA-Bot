@@ -6,6 +6,26 @@ const userSchema = mongoose.Schema({
     guildName: String,
     userID: String,
     username: String,
+    fortnitePlatform: {
+        'type': String,
+        'default': 'none'
+    },
+    fortniteUsername: {
+        'type': String,
+        'default': 'none'
+    },
+    codPlatform: {
+        'type': String,
+        'default': 'none'
+    },
+    codUsername: {
+        'type': String,
+        'default': 'none'
+    },
+    riotId: {
+        'type': String,
+        'default': 'none'
+    },
     experience: {
         'type': Number,
         'default': 0

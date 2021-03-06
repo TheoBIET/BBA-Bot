@@ -9,4 +9,4 @@ module.exports.run = (client, message, args, settings) => {
     message.channel.send(replies[reponse]);
 };
 
-module.exports.help = MESSAGES.COMMANDS.GAMES.EIGHTBALL;
+module.exports.help = MESSAGES.COMMANDS.MISCELLANEOUS.EIGHTBALL;
