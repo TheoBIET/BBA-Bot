@@ -22,7 +22,7 @@ You can freely retrieve the source code, modify it and host it on your own. Invi
 
 <p align="center">I tried to be original in the 'design' of the bot with well-worked embeds, such as the statistics system which is really complete</p>
 <p align="center">
-    <img src="https://cdn.discordapp.com/attachments/685246279495712889/816683050812440606/unknown.png" width='35%'>
+    <img src="https://cdn.discordapp.com/attachments/685246279495712889/816682732448383006/unknown.png" width='35%'>
     <img src="https://cdn.discordapp.com/attachments/685246279495712889/816683050812440606/unknown.png" width='35%'>
 </p>
 
